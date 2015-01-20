@@ -22,48 +22,45 @@ $section = "shirts";
 $pageTitle = $product["name"];
 include(ROOT_PATH . "inc/header.php"); ?>
 
-		<div class="section page">
-
-			<div class="wrapper">
-
-				<div class="breadcrumb"><a href="<?php echo BASE_URL; ?>shirts/">Shirts</a> &gt; <?php echo $product["name"]; ?></div>
-
-				<div class="shirt-picture">
+		<div class="container">
+			<div class="row">
+				<ol class="breadcrumb">
+					<li><a href="<?php echo BASE_URL; ?>shirts/">Shirts</a></li>
+					<li class="active"><?php echo $product["name"]; ?></li>
+				</ol>
+				<div class="col-md-5">
 					<span>
-						<img src="<?php echo BASE_URL . $product["img"]; ?>" alt="<?php echo $product["name"]; ?>">
+						<img class="img-responsive" src="<?php echo BASE_URL . $product["img"]; ?>" alt="<?php echo $product["name"]; ?>">
 					</span>
 				</div>
 
-				<div class="shirt-details">
+				<div class="col-md-7">
 
-					<h1><span class="price">$<?php echo $product["price"]; ?></span> <?php echo $product["name"]; ?></h1>
+					<h1 class="page-title"><?php echo $product["name"]; ?></h1>
 
-					<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_s-xclick">
-						<input type="hidden" name="hosted_button_id" value="<?php echo $product["paypal"]; ?>">
-						<input type="hidden" name="item_name" value="<?php echo $product["name"]; ?>">
-						<table>
-						<tr>
-							<th>
-								<input type="hidden" name="on0" value="Size">
-								<label for="os0">Size</label>
-							</th>
-							<td>
-								<select name="os0" id="os0">
-									<?php foreach($product["sizes"] as $size) { ?>
-									<option value="<?php echo $size; ?>"><?php echo $size; ?> </option>
-									<?php } ?>
-								</select>
-							</td>
-						</tr>
-						</table>
-						<input type="submit" value="Add to Cart" name="submit">
-					</form>
+					<div class="product-price">
+						PRICE:
+						<span class="price">$<?php echo $product["price"]; ?></span> </h1>
+					</div>
 
-					<p class="note-designer">* All shirts are designed by Mike the Frog.</p>
+						<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+							<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="<?php echo $product["paypal"]; ?>">
+							<input type="hidden" name="item_name" value="<?php echo $product["name"]; ?>">
+									<input type="hidden" name="on0" value="Size">
+									<label for="os0">Size</label>
+									<select class="form-control" name="os0" id="os0">
+										<?php foreach($product["sizes"] as $size) { ?>
+										<option value="<?php echo $size; ?>"><?php echo $size; ?> </option>
+										<?php } ?>
+									</select>
+							
+							<input class="btn btn-default" type="submit" value="Add to Cart" name="submit">
+						</form>
 
+						<p class="note-designer">* All shirts are designed by Mike the Frog.</p>
 				</div>
-
+				
 			</div>
 
 		</div>

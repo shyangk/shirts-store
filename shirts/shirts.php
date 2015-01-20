@@ -41,26 +41,22 @@ $pageTitle = "Mike's Full Catalog of Shirts";
 $section = "shirts";
 include(ROOT_PATH . 'inc/header.php'); ?>
 
-		<div class="section shirts page">
+		<div class="container">
 
-			<div class="wrapper">
-
-				<h1>Mike&rsquo;s Full Catalog of Shirts</h1>
+				<h1 class="page-title">Mike&rsquo;s Full Catalog of Shirts</h1>
 
 				<?php include(ROOT_PATH . "inc/partial-list-navigation.html.php"); ?>
 
-				<ul class="products">
+				<div class="row">
 					<?php
 						foreach($products as $product) {
 							include(ROOT_PATH . "inc/partial-product-list-view.html.php");
 						}
 					?>
-				</ul>
-
-				<?php include(ROOT_PATH . "inc/partial-list-navigation.html.php"); ?>
-
-			</div>
+				</div>
 
 		</div>
+
+		
 
 <?php include(ROOT_PATH . 'inc/footer.php') ?>

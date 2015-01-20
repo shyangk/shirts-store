@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
-
+    // the field named address is used as a spam honeypot
+    // it is hidden from users, and it must be left blank
     if (!isset($error_message) && $_POST["address"] != "") {
         $error_message = "Your form submission has an error.";
     }
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require_once(ROOT_PATH . "inc/phpmailer/class.phpmailer.php");
     $mail = new PHPMailer();
 
-    /*Gmail Settings For Testing Only
+    /* Gmail Settings For Testing Only
     $mail->IsSMTP();
     $mail->SMTPDebug  = 0; 
     
@@ -39,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->Username = "";
     $mail->Password = "";
     */
+    
 
     if (!isset($error_message) && !$mail->ValidateAddress($email)){
         $error_message = "You must specify a valid email address.";
@@ -70,11 +72,10 @@ $pageTitle = "Contact Mike";
 $section = "contact";
 include(ROOT_PATH . 'inc/header.php'); ?>
 
-    <div class="section page">
-
-        <div class="wrapper">
-
-            <h1>Contact</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="page-title">Contact</h1>
+            <div class="col-md-8">
 
             <?php if (isset($_GET["status"]) AND $_GET["status"] == "thanks") { ?>
                 <p>Thanks for the email! I&rsquo;ll be in touch shortly!</p>
@@ -87,48 +88,28 @@ include(ROOT_PATH . 'inc/header.php'); ?>
 
                 ?>
                 <form method="post" action="<?php echo BASE_URL; ?>contact/">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" id="name" value="<?php if (isset($name)) echo htmlspecialchars($name); ?>">
 
-                    <table>
-                        <tr>
-                            <th>
-                                <label for="name">Name</label>
-                            </th>
-                            <td>
-                                <input type="text" name="name" id="name" value="<?php if (isset($name)) echo htmlspecialchars($name); ?>">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="email">Email</label>
-                            </th>
-                            <td>
-                                <input type="email" name="email" id="email" value="<?php if (isset($email)) echo htmlspecialchars($email); ?>">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="message">Message</label>
-                            </th>
-                            <td>
-                                <textarea name="message" id="message"><?php if(isset($message)) echo htmlspecialchars($message); ?></textarea>
-                            </td>
-                        </tr> 
-                        <tr style="display: none;">
-                            <th>
-                                <label for="address">Address</label>
-                            </th>
-                            <td>
-                                <input type="text" name="address" id="address">
-                                <p>Humans (and frogs): please leave this field blank.</p>
-                            </td>
-                        </tr>                   
-                    </table>
-                    <input type="submit" value="Send">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" name="email" id="email" value="<?php if (isset($email)) echo htmlspecialchars($email); ?>">
+                    </div>
+                    <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message"><?php if(isset($message)) echo htmlspecialchars($message); ?></textarea>
+                    </div>
+                    <?php // the field named address is used as a spam honeypot ?>
+                    <?php // it is hidden from users, and it must be left blank ?>
+                    <input style="display: none" type="text" name="address" id="address">               
+                    <input class="btn btn-default" type="submit" value="Send">
 
                 </form>
 
             <?php } ?>
-
+            </div>
         </div>
 
     </div>

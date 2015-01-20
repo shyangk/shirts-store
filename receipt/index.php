@@ -4,9 +4,8 @@ $pageTitle = "Thank you for your order!";
 $section = "none";
 include(ROOT_PATH . "inc/header.php"); ?>
 
-	<div class="section page">
+	<div class="container">
 
-		<div class="wrapper">
 
 			<h1>Thank You!</h1>
 
@@ -14,7 +13,6 @@ include(ROOT_PATH . "inc/header.php"); ?>
 
 			<p>Need another shirt already? Visit the <a href="/shirts.php">Shirts Listing</a> page again.</p>
 
-		</div>
 
 	</div>
 
